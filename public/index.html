@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Minha Aplicação Web</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🚀 Minha Aplicação Web</h1>
+    <p>Rodando com Docker Compose</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Sobre</h2>
+      <p>
+        Esta é uma aplicação web simples, containerizada com Docker,
+        ideal para estudos e ambientes de desenvolvimento.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Status</h2>
+      <p id="status">Verificando...</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 - Projeto Docker</p>
+  </footer>
+
+  <script>
+    fetch("/health")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("status").innerText =
+          "Aplicação saudável ✅ (uptime: " + Math.round(data.uptime) + "s)";
+      })
+      .catch(() => {
+        document.getElementById("status").innerText = "Erro ao verificar status ❌";
+      });
+  </script>
+</body>
+</html>
